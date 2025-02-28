@@ -1,7 +1,7 @@
-const generateButton = document.getElementById('generate-button'); 
-const copyButton = document.getElementById('copy-button');
+const generateButton = document.getElementById('generate-button');
 const promptArea = document.getElementById('prompt-area');
 const notification = document.getElementById('notification');
+const negativePromptInput = document.getElementById('negative-prompt');
 
 const keywords = {
     environments: [
@@ -115,17 +115,26 @@ function generatePrompt() {
         prompt += ` ${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} over a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
     }
 
+    // Add negative prompt if provided
+    const negativePrompt = negativePromptInput.value.trim();
+    if (negativePrompt) {
+        prompt += ` --no ${negativePrompt}`;
+    }
+
     promptArea.textContent = prompt;
 }
 
 generateButton.addEventListener('click', generatePrompt);
 
-copyButton.addEventListener('click', () => {
+// Copiar o prompt ao clicar na área do prompt
+promptArea.addEventListener('click', () => {
     const promptText = promptArea.textContent;
-    navigator.clipboard.writeText(promptText).then(() => {
-        notification.style.display = 'block';
-        setTimeout(() => {
-            notification.style.display = 'none';
-        }, 2000);
-    });
+    if (promptText) {
+        navigator.clipboard.writeText(promptText).then(() => {
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        });
+    }
 });
