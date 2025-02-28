@@ -1,72 +1,165 @@
-body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background-color: #f0f8ff;
-    color: #333;
+/* Reset básico */
+body, html {
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
-    background-image: url('https://i.ibb.co/5WFxMph8/unnamed.png');
-    background-size: cover;
-    background-position: center;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #E0E0E0;
 }
 
+/* Vídeo de fundo */
+#video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+    overflow: hidden;
+}
+
+#video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw; /* 100% da largura da viewport */
+    height: 100vh; /* 100% da altura da viewport */
+    transform: translate(-50%, -50%); /* Centraliza o vídeo */
+    min-width: 100%; /* Garante que cubra a largura */
+    min-height: 100%; /* Garante que cubra a altura */
+    object-fit: cover; /* Corta o vídeo para cobrir a área */
+}
+
+/* Contêiner principal */
 .container {
-    text-align: center;
+    position: relative;
+    z-index: 1; /* Coloca o conteúdo na frente do vídeo */
+    background-color: rgba(255, 255, 255, 0.8); /* Branco semi-transparente */
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    text-align: center;
+    margin: 20px auto; /* Centraliza o contêiner */
 }
 
+/* Título */
 h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    color: #8A2BE2;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 2.5rem; /* Mesmo tamanho do código original */
+    color: #ff1493; /* Rosa vibrante */
+    text-shadow: 0 0 5px rgba(255, 20, 147, 0.3), 0 0 10px rgba(255, 20, 147, 0.3); /* Glow mais suave */
 }
 
-button {
-    background-color: #8A2BE2;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 1rem;
-    border-radius: 8px;
+/* Parágrafo */
+p {
+    font-size: 1rem; /* Mesmo tamanho do código original */
+    color: #555; /* Cor mais escura para melhor contraste */
+    margin-bottom: 20px; /* Espaçamento abaixo do parágrafo */
+}
+
+/* Área do prompt */
+#prompt-area {
+    padding: 20px;
+    border: 1px solid #ff1493; /* Rosa vibrante */
+    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #333; /* Texto escuro para contraste */
+    margin-top: 20px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    animation: glow 3s infinite;
+    height: 150px; /* Altura fixa */
+    overflow-y: auto; /* Adiciona scroll se o conteúdo for muito longo */
+}
+
+/* Animação de brilho */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px #ff1493; }
+    50% { box-shadow: 0 0 10px #ff1493; }
+    100% { box-shadow: 0 0 5px #ff1493; }
+}
+
+/* Botão */
+button {
+    padding: 10px 20px;
+    background-color: #ff1493; /* Rosa vibrante */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px; /* Mesmo tamanho do código original */
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #7A1D94;
+    background-color: #ff69b4; /* Rosa mais claro */
+    transform: scale(1.05);
 }
 
-.prompt-box {
-    font-size: 1.2rem;
+/* Rodapé */
+footer {
     margin-top: 20px;
-    padding: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    min-height: 200px;
-    max-width: 100%;
-    word-wrap: break-word;
-    text-align: justify;
+    font-size: 0.9rem; /* Mesmo tamanho do código original */
+    color: #888;
 }
 
+/* Grupo de entrada (textarea) */
+.input-group {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ff1493; /* Rosa vibrante */
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem; /* Mesmo tamanho do código original */
+}
+
+.input-group textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid #ff1493; /* Rosa vibrante */
+    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    color: #333; /* Texto escuro para contraste */
+    font-size: 14px; /* Mesmo tamanho do código original */
+    resize: vertical;
+    min-height: 100px; /* Mesma altura do código original */
+    font-family: 'Noto Sans JP', sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
+    background-blend-mode: overlay;
+}
+
+.input-group textarea:focus {
+    border-color: #ff69b4; /* Rosa mais claro */
+    box-shadow: 0 0 10px #ff69b4;
+}
+
+.input-group textarea:hover {
+    transform: scale(1.02);
+}
+
+/* Notificação */
 .notification {
-    display: none;
     position: fixed;
     bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #8A2BE2;
+    right: 20px;
+    background-color: #ff1493; /* Rosa vibrante */
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 5px;
+    display: none; /* Inicialmente oculta */
+    font-size: 14px; /* Mesmo tamanho do código original */
+    z-index: 1000;
 }
