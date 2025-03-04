@@ -5,7 +5,7 @@ body, html {
     height: 100%;
     overflow: hidden;
     font-family: 'Noto Sans JP', sans-serif;
-    color: #E0E0E0;
+    color: #333; /* Texto escuro para contraste */
 }
 
 /* Vídeo de fundo */
@@ -35,35 +35,37 @@ body, html {
 .container {
     position: relative;
     z-index: 1; /* Coloca o conteúdo na frente do vídeo */
-    background-color: rgba(255, 255, 255, 0.8); /* Branco semi-transparente */
+    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
     padding: 20px;
     border-radius: 10px;
     width: 90%;
     max-width: 800px;
     text-align: center;
     margin: 20px auto; /* Centraliza o contêiner */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
 /* Título */
 h1 {
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 2.5rem; /* Mesmo tamanho do código original */
+    font-size: 2.5rem; /* Tamanho grande para destaque */
     color: #ff1493; /* Rosa vibrante */
-    text-shadow: 0 0 5px rgba(255, 20, 147, 0.3), 0 0 10px rgba(255, 20, 147, 0.3); /* Glow mais suave */
+    text-shadow: 0 0 5px rgba(255, 20, 147, 0.3); /* Sombra suave */
+    margin-bottom: 10px;
 }
 
 /* Parágrafo */
 p {
-    font-size: 1rem; /* Mesmo tamanho do código original */
-    color: #555; /* Cor mais escura para melhor contraste */
-    margin-bottom: 20px; /* Espaçamento abaixo do parágrafo */
+    font-size: 1rem;
+    color: #555; /* Texto cinza escuro para contraste */
+    margin-bottom: 20px;
 }
 
 /* Área do prompt */
 #prompt-area {
     padding: 20px;
-    border: 1px solid #ff1493; /* Rosa vibrante */
-    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    border: 2px solid #ff1493; /* Borda rosa */
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco quase sólido */
     font-family: 'Noto Sans JP', sans-serif;
     color: #333; /* Texto escuro para contraste */
     margin-top: 20px;
@@ -85,11 +87,11 @@ p {
 button {
     padding: 10px 20px;
     background-color: #ff1493; /* Rosa vibrante */
-    color: #fff;
+    color: #fff; /* Texto branco */
     border: none;
     cursor: pointer;
     border-radius: 5px;
-    font-size: 16px; /* Mesmo tamanho do código original */
+    font-size: 16px;
     transition: all 0.3s ease;
 }
 
@@ -101,8 +103,8 @@ button:hover {
 /* Rodapé */
 footer {
     margin-top: 20px;
-    font-size: 0.9rem; /* Mesmo tamanho do código original */
-    color: #888;
+    font-size: 0.9rem;
+    color: #888; /* Texto cinza */
 }
 
 /* Grupo de entrada (textarea) */
@@ -120,7 +122,7 @@ footer {
     font-weight: bold;
     color: #ff1493; /* Rosa vibrante */
     font-family: 'Noto Sans JP', sans-serif;
-    font-size: 1.2rem; /* Mesmo tamanho do código original */
+    font-size: 1.2rem;
 }
 
 .input-group textarea {
@@ -128,17 +130,15 @@ footer {
     max-width: 600px;
     padding: 15px;
     border-radius: 5px;
-    border: 2px solid #ff1493; /* Rosa vibrante */
-    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    border: 2px solid #ff1493; /* Borda rosa */
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco quase sólido */
     color: #333; /* Texto escuro para contraste */
-    font-size: 14px; /* Mesmo tamanho do código original */
+    font-size: 14px;
     resize: vertical;
-    min-height: 100px; /* Mesma altura do código original */
+    min-height: 100px;
     font-family: 'Noto Sans JP', sans-serif;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-    background-image: url('https://www.transparenttextures.com/patterns/old-paper.png');
-    background-blend-mode: overlay;
 }
 
 .input-group textarea:focus {
@@ -160,6 +160,47 @@ footer {
     padding: 15px;
     border-radius: 5px;
     display: none; /* Inicialmente oculta */
-    font-size: 14px; /* Mesmo tamanho do código original */
+    font-size: 14px;
     z-index: 1000;
+}
+
+/* Estilos para a área de título */
+.title-group {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title-group label {
+    font-size: 1.1rem;
+    color: #ff1493; /* Rosa vibrante */
+    text-shadow: 0 0 5px rgba(255, 20, 147, 0.3);
+    margin-bottom: 10px;
+}
+
+.title-group textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 2px solid #ff1493; /* Borda rosa */
+    background-color: rgba(255, 255, 255, 0.95); /* Fundo branco quase sólido */
+    color: #333; /* Texto escuro para contraste */
+    font-size: 14px;
+    resize: none; /* Impede o redimensionamento */
+    min-height: 60px;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer; /* Indica que é clicável */
+}
+
+.title-group textarea:focus {
+    border-color: #ff69b4; /* Rosa mais claro */
+    box-shadow: 0 0 10px #ff69b4;
+}
+
+.title-group textarea:hover {
+    transform: scale(1.02);
 }
