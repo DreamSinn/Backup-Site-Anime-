@@ -2,7 +2,31 @@ const generateButton = document.getElementById('generate-button');
 const promptArea = document.getElementById('prompt-area');
 const notification = document.getElementById('notification');
 const negativePromptInput = document.getElementById('negative-prompt');
+const generatedTitle = document.getElementById('generated-title'); // Nova textarea para o título
 
+// Emojis relacionados ao tema de anime
+const emojis = ["🌸", "⚔️", "🎌", "🎨", "🌟", "👾", "🍥", "🎮", "📺", "🎎", "🎴", "🍣"];
+
+// Hashtags variadas
+const hashtags = [
+    "#Midjourney","#aiart","#animeart", "#anime", "#animefanart", "#animeChill", "#animeLofi", "#animeworld", 
+    "#animeedit", "#animefan", "#animeartwork", "#animecommunity", "#animestyle", "#animevibes",
+    "#animeaesthetic", "#animefanart", "#animeartist", "#animeillustration", "#animefanartwork"
+];
+
+// Padrões de títulos dinâmicos
+const titlePatterns = [
+    "✨ {emoji} {adjective} {noun} in {environment} {emoji} ✨ {hashtags}",
+    "🌟 {emoji} {verb} with {adjective} {noun} in {environment} {emoji} 🌟 {hashtags}",
+    "🌸 {emoji} A {adjective} {noun} {verb} in {environment} {emoji} 🌸 {hashtags}",
+    "🎌 {emoji} The {adjective} {noun} of {environment} {emoji} 🎌 {hashtags}",
+    "🎨 {emoji} {adjective} {noun} {verb} under {environment} {emoji} 🎨 {hashtags}",
+    "⚔️ {emoji} {adjective} {noun} {verb} amidst {environment} {emoji} ⚔️ {hashtags}",
+    "📺 {emoji} {adjective} {noun} {verb} within {environment} {emoji} 📺 {hashtags}",
+    "🎮 {emoji} {adjective} {noun} {verb} surrounded by {environment} {emoji} 🎮 {hashtags}"
+];
+
+// Palavras-chave para o prompt
 const keywords = {
     environments: [
         "cherry blossom landscape", "Mount Fuji", "rice field", "zen temple", "bamboo forest", "traditional village", "peaceful beach",
@@ -78,53 +102,97 @@ const keywords = {
 };
 
 const beginnings = [
-    "In the distance, ", "Beneath the trees, ", "On the horizon, ", "A glimpse of a town in the distance, ", 
-    "Far off in the distance, ", "Over the hills, ", "Across the valley, ", "At the peak of the mountain, ",
-    "In the center of a bustling city, ", "Above the river, ", "At the foot of the waterfall, ", 
-    "Along the coast, ", "Under the soft pink sky, ", "In the heart of the jungle, ", "Amidst the old stone ruins, ",
-    "Behind the bamboo grove, ", "Through the mist, ", "At the edge of the sea, ", "Through the dense fog, ",
-    "Upon a rocky outcrop, ", "Near the ancient ruins, ", "On the quiet shores, ", "Within the sacred temple, ",
-    "Among the cherry blossoms, ", "Inside the hollow tree, ", "Atop a secluded hill, ", "On the quiet streets, ",
-    "In the shadow of the mountains, ", "Beside the riverbank, ", "In the moonlit forest, ", "At the foot of the cliffs, ",
-    "Beneath the darkening sky, ", "Along the dusty road, ", "Within the peaceful valley, ", "In the warmth of the sun, ",
-    "On the horizon line, ", "Amidst the towering mountains, ", "In the cool evening air, ", "Through the winding path, ",
-    "At the edge of the garden, ", "Through the endless field, ", "In the heart of the temple, "
+    "In the heart of ", "Under the neon lights of ", "In the shadows of ", "Within the walls of ", "In the midst of ",
+    "On the path to ", "At the edge of ", "In the depths of ", "Beside ", "In front of "
 ];
 
 const endings = [
-    "surrounded by mist and ancient trees.", "where the past and future meet.", "full of serene light and natural beauty.", 
-    "where the land whispers its secrets.", "with a quiet breeze brushing through.", "that radiates timeless peace.", 
-    "offering a glimpse of a forgotten world.", "where dreams take flight.", "on the edge of a dream.", 
-    "under the soft glow of the stars.", "shrouded in the glow of sunset.", "with the distant sound of waves crashing.", 
-    "floating in an ethereal haze.", "bathed in warm golden light.", "where the earth feels alive.", 
-    "shrouded in soft golden mist.", "at the threshold of time.", "where the moonlight dances on the water.", 
-    "imbued with a sense of nostalgia.", "casting long shadows over the land.", "with the soft touch of the past lingering.", 
-    "where the air is thick with history.", "where every corner tells a story.", "under a sky that tells its own story.", 
-    "where nothing moves but the stars.", "whispering the ancient tales of the earth.", "with every stone telling a story."
+    "where legends are born.", "where adventure awaits.", "where magic flows freely.", "where the future unfolds.",
+    "where dreams come alive.", "where the past meets the future.", "where the brave rise.", "where the unknown calls."
 ];
 
 function getRandomElement(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
 }
 
+// Função para selecionar hashtags aleatórias
+function selectHashtags(count) {
+    const selectedHashtags = ["#animeart", "#anime"]; // Hashtags obrigatórias
+    while (selectedHashtags.length < count) {
+        const randomHashtag = hashtags[Math.floor(Math.random() * hashtags.length)];
+        if (!selectedHashtags.includes(randomHashtag)) {
+            selectedHashtags.push(randomHashtag);
+        }
+    }
+    return selectedHashtags;
+}
+
+// Função para gerar um título dinâmico
+function generateTitle() {
+    // Escolhe um padrão de título aleatório
+    const pattern = titlePatterns[Math.floor(Math.random() * titlePatterns.length)];
+
+    // Seleciona palavras-chave aleatórias
+    const adjective = getRandomElement(keywords.adjectives);
+    const noun = getRandomElement(keywords.nouns);
+    const verb = getRandomElement(keywords.verbs);
+    const environment = getRandomElement(keywords.environments);
+    const emoji = getRandomElement(emojis);
+
+    // Seleciona 6 hashtags (2 obrigatórias + 4 aleatórias)
+    const selectedHashtags = selectHashtags(6);
+
+    // Substitui os espaços reservados no padrão
+    const title = pattern
+        .replace(/{emoji}/g, emoji) // Substitui todos os {emoji}
+        .replace("{adjective}", adjective)
+        .replace("{noun}", noun)
+        .replace("{verb}", verb)
+        .replace("{environment}", environment)
+        .replace("{hashtags}", selectedHashtags.join(" "));
+
+    return title;
+}
+
+// Função para gerar o prompt e o título
 function generatePrompt() {
-    let prompt = `/imagine prompt: ${getRandomElement(beginnings)}${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} over a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
+    let prompt = `/imagine prompt: ${getRandomElement(beginnings)}${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} in a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
     
-    // Check length, ensure it meets the 400 character requirement
+    // Adiciona mais conteúdo para atingir 400 caracteres
     while (prompt.length < 400) {
-        prompt += ` ${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} over a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
+        prompt += ` ${getRandomElement(keywords.adjectives)} ${getRandomElement(keywords.nouns)} and ${getRandomElement(keywords.verbs)} in a ${getRandomElement(keywords.environments)}.${getRandomElement(endings)}`;
     }
 
-    // Add negative prompt if provided
+    // Adiciona negative prompt se fornecido
     const negativePrompt = negativePromptInput.value.trim();
     if (negativePrompt) {
         prompt += ` --no ${negativePrompt}`;
     }
 
+    // Adiciona 6 hashtags ao prompt
+    const promptHashtags = selectHashtags(6);
+    prompt += ` ${promptHashtags.join(" ")}`;
+
+    // Exibe o prompt na área de prompt
     promptArea.textContent = prompt;
+
+    // Gera e exibe o título
+    const title = generateTitle();
+    generatedTitle.value = title;
 }
 
-generateButton.addEventListener('click', generatePrompt);
+// Copiar o título ao clicar na área do título
+generatedTitle.addEventListener('click', () => {
+    if (generatedTitle.value) {
+        navigator.clipboard.writeText(generatedTitle.value).then(() => {
+            notification.style.display = 'block';
+            notification.textContent = "Título copiado para a área de transferência!";
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        });
+    }
+});
 
 // Copiar o prompt ao clicar na área do prompt
 promptArea.addEventListener('click', () => {
@@ -132,9 +200,12 @@ promptArea.addEventListener('click', () => {
     if (promptText) {
         navigator.clipboard.writeText(promptText).then(() => {
             notification.style.display = 'block';
+            notification.textContent = "Prompt copiado para a área de transferência!";
             setTimeout(() => {
                 notification.style.display = 'none';
             }, 2000);
         });
     }
 });
+
+generateButton.addEventListener('click', generatePrompt);
