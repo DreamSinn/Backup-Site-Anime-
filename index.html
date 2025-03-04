@@ -1,49 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Prompt Generator</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Prompts de Anime</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <!-- Vídeo de fundo com tema anime -->
-    <div id="video-background">
-        <video autoplay muted loop id="my-video">
-            <source src="https://github.com/DreamSinn/Backup-Site-Anime-/raw/refs/heads/main/videos/pequeno.mp4" type="video/mp4">
-            Seu navegador não suporta vídeos HTML5.
-        </video>
+  <div id="video-background">
+    <video autoplay muted loop id="my-video">
+      <source src="https://github.com/DreamSinn/Backup-Site-Anime-/raw/refs/heads/main/videos/pequeno.mp4" type="video/mp4">
+      Seu navegador não suporta vídeos HTML5.
+    </video>
+  </div>
+
+  <div class="container">
+    <header>
+      <h1>Gerador de Prompts de Anime</h1>
+      <p>Crie prompts incríveis para gerar imagens no estilo anime.</p>
+    </header>
+
+    <!-- Área onde o prompt gerado será exibido -->
+    <div id="prompt-area">Seu prompt aparecerá aqui.</div>
+
+    <!-- Área para o título gerado -->
+    <div class="input-group title-group">
+      <label for="generated-title">
+        <i class="fas fa-heading"></i> Título Gerado:
+      </label>
+      <textarea id="generated-title" readonly></textarea>
     </div>
 
-    <!-- Conteúdo sobreposto -->
-    <div class="container">
-        <header>
-            <h1>Anime Prompt Generator</h1>
-            <p>Create vibrant anime scenes with a single click!</p>
-        </header>
-
-        <!-- Área onde o prompt gerado será exibido -->
-        <div id="prompt-area">Your generated prompt will appear here.</div>
-
-        <!-- Área para Negative Prompts -->
-        <div class="input-group">
-            <label for="negative-prompt">
-                <i class="fas fa-scroll"></i> Negative Prompts:
-            </label>
-            <textarea id="negative-prompt" placeholder="Enter terms to exclude"></textarea>
-        </div>
-
-        <!-- Botão para gerar o prompt -->
-        <div class="button-container">
-            <button id="generate-button">Generate Prompt</button>
-        </div>
+    <!-- Área para Negative Prompts -->
+    <div class="input-group">
+      <label for="negative-prompt">
+        <i class="fas fa-scroll"></i> Negative Prompts:
+      </label>
+      <textarea id="negative-prompt" placeholder="Digite termos para excluir"></textarea>
     </div>
 
-    <!-- Notificação de cópia -->
-    <div id="notification" class="notification">Prompt copied to clipboard!</div>
+    <!-- Botão para gerar o prompt -->
+    <div class="button-container">
+      <button id="generate-button">Gerar Prompt</button>
+    </div>
+  </div>
 
-    <script src="app.js"></script>
+  <!-- Notificação de cópia -->
+  <div id="notification" class="notification">Prompt copiado para a área de transferência!</div>
+
+  <script src="app.js"></script>
 </body>
 </html>
